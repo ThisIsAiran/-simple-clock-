@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>clock</title>
+	<style>
+		body{
+			width: cover;
+			height: cover;
+		background-image: linear-gradient(to right,black, grey,black);
+		background-size: 1400px 800px;
+		
+		}
+		.clock{
+			position: fixed;
+			top: 200px;
+			left: 300px;
+			width: 300px;
+			height: 300px;
+			border: 15px solid black;
+			border-radius: 50%;
+			box-shadow: 0px 0px 10px grey;
+			background-image: url(clock.png);
+			background-size: 300px 300px;
+			
+		}
+		.hand{
+         
+            position: fixed;
+            top: 363px;
+            left:326px;
+            background-color: white;
+            transform-origin: right;
+            transition: all 0.05s;
+            transform: rotate(90deg);
+            transition-timing-function: cubic-bezier(0.1,2.7,0.58,1);
+		}
+		.hour-hand
+		{
+			width: 140px;
+            height: 7px;
+         background-color: green;
+         
+		}
+		.min-hand
+		{
+
+			width: 140px;
+            height: 4px;
+        background-color: red;
+        
+		}
+        .second-hand
+        {
+
+			width: 140px;
+            height: 2px;
+          background-color: yellow;
+          
+        }
+        span{
+        	font-size: 30px;
+        	color: white;
+        	margin-left: 20px;
+
+        }
+        .color{
+        	margin-top: 10px;
+        	width: 40px;
+        	height: 15px;
+        	
+        	margin-left: 20px;
+        }
+        .symbol{
+        	margin-top: 20px;
+        	display: flex;
+        	flex-direction: row;
+        	justify-content: center;
+
+        }
+        .a{
+          background-color: yellow;
+        }
+        .b{
+        	 background-color: red;
+        }
+        .c{
+        	 background-color: green;
+        }
+	</style>
+</head>
+<body>
+  <div class="symbol">
+  	<span class="s">SECONDS</span><div class="color a"></div><br>
+  	<span class="m">MINUTES</span><div class="color b"></div><br>
+  	<span class="h">HOURS</span><div class="color c"></div>
+  </div>
+ <div class="clock">
+ 	<div class="hand hour-hand"></div>
+ 	<div class="hand min-hand"></div>
+ 	<div class="hand second-hand"></div>
+ </div>
+ <script>
+        var i =1,ans=0,l=9;
+        function setDate() {
+        const date = new Date();
+ 		var seconds = date.getSeconds();
+ 		var minute =  date.getMinutes();
+ 		var hour = date.getHours();
+ 		const a = seconds;
+        seconds =seconds + ans;
+        if(seconds%60==0)
+        {   seconds =0;
+        	ans = 60*i;
+        	i++;
+        	seconds = seconds + ans;
+        }
+        console.log(seconds);
+        document.querySelector(".hand").style.transition = "all 0.05s";
+ 		document.querySelector(".hour-hand").style.transform = "rotate(" + (hour*30+90) + "deg)";
+ 		const minuteh = document.querySelector(".min-hand").style.transform = "rotate(" + (minute*6+90) + "deg)";
+ 		const secondh = document.querySelector(".second-hand").style.transform = "rotate(" + (seconds*6+90) + "deg)";
+        }
+        setInterval(setDate,1000);
+ 		
+ 	
+ </script>
+</body>
+</html>
